@@ -8,6 +8,10 @@ import Question from "./Question"
 import NextButton from "./nextbutton"
 import ProgressBar from "./progress"
 import FinishScreen from "./FinishScreen"
+import Timer from "./Timer"
+import Footer from "./Footer"
+
+const SEC_PER_QUESTION = 30
 
 const initialState = {
   questions : [],
@@ -17,7 +21,8 @@ const initialState = {
   index : 0,
   answer : null,
   points : 0,
-  Highscore : 0
+  Highscore : 0,
+  secondsRemaining :  null
 }
 
 function reducer(state,action){
@@ -31,12 +36,13 @@ function reducer(state,action){
     case "dataFailed":
       return {
         ...state,
-        status : "error"
+        status : "error"     
       }
     case "start":
       return {
         ...state,
-        status : "active"
+        status : "active",
+        secondsRemaining : state.questions.length * SEC_PER_QUESTION
       }
     case "nextQuestion":
       return {
@@ -62,8 +68,13 @@ function reducer(state,action){
       return {
         ...initialState,
         questions : state.questions,
-        status : "ready"
-        
+        status : "ready"       
+      }
+    case "tick" :
+      return {
+        ...state,
+        secondsRemaining : state.secondsRemaining - 1,
+        status : state.secondsRemaining === 0 ? "finish" : state.status
       }
     default : 
       throw new Error ('action is unknown')
@@ -73,7 +84,7 @@ function reducer(state,action){
 
 
 function App() {
-  const [{questions,status,index,answer,points,Highscore}, dispatch] = useReducer(reducer,initialState)
+  const [{questions,status,index,answer,points,Highscore,secondsRemaining}, dispatch] = useReducer(reducer,initialState)
 
   const numQuestions = questions.length;
   const maxPossiblePoints = questions.reduce((prev,cur)=> prev + cur.points,0)
@@ -98,8 +109,15 @@ function App() {
                 question={questions[index]} 
                 dispatch={dispatch}
                 answer={answer}/>
-              <NextButton dispatch={dispatch} answer={answer} index={index} numQuestions={numQuestions}/>
+              <Footer>
+                <Timer dispatch={dispatch} secondsRemaining={secondsRemaining}/>
+                <NextButton dispatch={dispatch}
+                answer={answer} 
+                index={index} 
+                numQuestions={numQuestions}/>
+              </Footer>
             </>
+           
             }
             {status === "finish" &&  <FinishScreen points={points} maxPossiblePoints={maxPossiblePoints} index={index} numQuestions={numQuestions} Highscore={Highscore} dispatch={dispatch}/>}
            
