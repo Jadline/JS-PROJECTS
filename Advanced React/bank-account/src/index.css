@@ -1,0 +1,66 @@
+.App {
+  text-align : center;
+  background-color : navy;
+  margin : 0 300px;
+  padding : 20px;
+  color : #fff;
+}
+/* body {
+  background-color : rgb(116, 7, 7)
+} */
+button {
+  min-width : 100px;
+  max-width : 300px;
+  border-radius : 20px;
+  white-space : nowrap;
+  padding : 10px 20px;
+  border : none;
+  color : #fff;
+  font-size : 16px;
+  font-weight :600;
+  text-align : center;
+}
+button:disabled {
+  opacity : 0.8;
+  cursor : not-allowed;
+}
+.open-account {
+  background-color : hsl(120, 100%, 25%);
+}
+.open-account:disabled {
+  background-color : hsl(120, 100%, 45%)
+}
+.deposit {
+  background-color : hsl(240, 100%, 50%);
+}
+.deposit:disabled {
+  background-color :hsl(240, 100%, 75%);
+}
+.withdraw {
+  background-color : hsl(300, 100%, 25%);
+}
+.withdraw:disabled{
+  background-color :hsl(300, 100%, 45%);
+}
+.requestLoan {
+  background-color : hsl(0, 100%, 50%);
+}
+.requestLoan:disabled {
+  background-color: hsl(0, 100%, 75%);
+}
+.payLoan {
+  background-color : hsl(39, 100%, 50%);
+}
+.payloan:disabled {
+  background-color :hsl(39, 100%, 75%)
+}
+.closeAccount {
+  background-color : hsl(0, 91%, 26%)
+}
+.closeAccount:disabled {
+  background-color :hsl(0, 91%, 46%);
+}
+.balance,.loan {
+  font-size : 24px;
+  font-weight : 600
+}
