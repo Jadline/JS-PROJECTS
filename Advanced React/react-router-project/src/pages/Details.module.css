@@ -1,0 +1,17 @@
+*{
+    margin : 0;
+    padding : 0;
+    box-sizing : border-box;
+}
+.detailsContainer {
+    background : linear-gradient(to bottom, hsl(39, 100%, 30%),hsl(16, 100%, 50%));
+    /* width : 100vw;
+    height : 85vh; */
+    margin : 0 auto;
+    color : #fff;
+    font-size : 18px;
+    border-radius : 10px;
+    width : 800px;
+    margin-top : 50px;
+    padding : 30px;
+}
