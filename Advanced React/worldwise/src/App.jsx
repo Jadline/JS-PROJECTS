@@ -11,6 +11,7 @@ import CountryList from "./Components/CountryList"
 import {useState,useEffect} from "react"
 import Form from "./Components/Form"
 import City from "./Components/City"
+import { Navigate } from "react-router-dom"
 
 const BASE_URL = "http://localhost:8000"
 function App() {
@@ -44,7 +45,7 @@ function App() {
         <Route path="pricing" element={<Pricing/>}/>
         <Route path="login" element={<Login/>}/>
         <Route path="app" element={<AppLayout/>}>
-          <Route index element={<CityList cities={cities} isLoading={isLoading}/>}/>
+          <Route index element={<Navigate replace to="cities"/>}/>
           <Route path="cities" element={<CityList cities={cities} isLoading={isLoading}/>}/>
           <Route path="cities/:id" element={<City/>}/>
           <Route path="countries" element={<CountryList cities={cities} isLoading={isLoading}/>}/>
