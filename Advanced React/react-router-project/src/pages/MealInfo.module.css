@@ -1,5 +1,38 @@
 .image {
-    width : 300px;
-    height : 300px;
+    width : 150px;
+    height : 150px;
     border-radius : 50%;
+}
+.infoContainer {
+    display : flex;
+    flex-direction : column;
+    justify-content : center;
+    align-items : center;
+    
+}
+.instructions {
+   margin-top : 20px;
+}
+.pinstructions {
+    line-height : 1.6;
+    margin-bottom : 15px;
+}
+.youtubelink {
+    font-size : 22px;
+    margin-top : 20px;
+}
+.infodata {
+    display : flex;
+    flex-direction : column;
+    align-items : center;
+    border : 2px solid #fff;
+    padding : 20px;
+    margin-bottom : 15px;
+}
+.infodata h2 {
+    margin-bottom : 10px;
+    text-decoration : underline;
+}
+.infodata p {
+    margin-bottom : 10px;
 }

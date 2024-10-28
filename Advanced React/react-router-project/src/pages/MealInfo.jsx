@@ -46,17 +46,20 @@ function MealInfo({info}){
       strMeasure17,
     } = info
     return (
-        <div>
-            <h2>Meal : <span>{strMeal}</span></h2>
-            <p>Category : <span>{strCategory}</span></p>
-            <p>Origin : <span>{strArea}</span></p>
-            <p>Tags : <span>{strTags}</span></p>
+        <div className={styles.infoContainer}>
+            <div className={styles.infodata}>
+                <h2>Meal : <span>{strMeal}</span></h2>
+                <p>Category : <span>{strCategory}</span></p>
+                <p>Origin : <span>{strArea}</span></p>
+                <p>Tags : <span>{strTags}</span></p>
+            </div>
+            
             <h3>Ingredients</h3>
             <div></div>
-            <h3>Instructions</h3>
-            <p>{strInstructions}</p>
+            <h3 className={styles.instructions}>Instructions</h3>
+            <p className={styles.pinstructions}>{strInstructions}</p>
             <img src={strMealThumb} className={styles.image}/>
-            <a href={strYoutube}>Watch Recipe</a>
+            <a href={strYoutube} className={styles.youtubelink}>Watch Recipe</a>
         </div>
         
     )
