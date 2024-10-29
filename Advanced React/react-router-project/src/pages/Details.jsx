@@ -1,5 +1,7 @@
 import styles from "./Details.module.css"
 import MealInfo from "./MealInfo"
+import { useEffect,useState } from "react"
+import {useParams} from 'react-router-dom'
 const mealinfo = [
     {
         "idMeal": "52944",
@@ -49,9 +51,45 @@ const mealinfo = [
 ]
 
 function Details (){
+    const[mealdata,setMealdata] = useState([])
+    const controller = new AbortController()
+    const timeoutid = setTimeout(() => {
+        controller.abort()
+    },5000);
+    const {recipename} = useParams()
+    console.log(recipename)
+    useEffect(() => {
+        async function getRecipe(){
+        try{
+            const res = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${encodeURIComponent(recipename)}`, {signal : controller.signal})
+            if (!res.ok) throw new Error(`There was a ${res.status} error while fetching the data`)
+            const data = await res.json()
+           
+            setMealdata(data.meals)
+        } 
+        catch(error){
+            if(error.name === 'AbortError'){
+                console.error('request was aborted')
+            }
+            else {
+                console.error('Fetch error',error)
+            }
+
+        }
+        finally {
+            clearTimeout(timeoutid)
+        }
+    }
+        
+    getRecipe()
+    },[recipename])
+
+    
     return(
         <div className={styles.detailsContainer}>
-            {mealinfo.map((info) => <MealInfo info={info} key={info.idMeal}/>)}
+            {mealdata.map((info) => 
+            
+            <MealInfo info={info} key={info.idMeal}/>)}
         </div>
     )
 }

@@ -1,5 +1,7 @@
 import MealItem from "./MealItem"
 import styles from "./Category.module.css"
+import { useParams } from "react-router-dom"
+import { useEffect,useState } from "react"
 
 
     const meals = [
@@ -150,9 +152,22 @@ import styles from "./Category.module.css"
       }
     ]
 function CategoryMeal(){
+  const [meals,setMeals] = useState([])
+  const { category } = useParams()
+  useEffect(() => {
+    async function getMealCategory(){
+      const res = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`)
+      if(!res.ok) throw new Error(`There was a ${res.status} error fetching data `)
+      const data = await res.json()
+      console.log(data)
+      setMeals(data.meals)
+    }
+    getMealCategory()
+  },[category])
+  
     return(
         <ul className={styles.recipeContainer}>
-           {meals.map(meal => <MealItem meal={meal} key={meal.idMeal}/>)}
+           {meals?.map(meal => <MealItem meal={meal} key={meal.idMeal}/>)}
         </ul>
     )
 }

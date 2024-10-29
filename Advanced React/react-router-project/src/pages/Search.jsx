@@ -1,5 +1,6 @@
 import styles from "./Search.module.css"
 import {useState} from "react"
+import { useNavigate } from "react-router-dom"
 
 const options =[
     'Beef',
@@ -14,14 +15,23 @@ const options =[
 
 function Search(){
     const[category,setCategory] = useState('')
+    const navigate = useNavigate()
     console.log(category)
+    function handleCategorySelection (e){
+        const selectedCategory = e.target.value;
+        setCategory(selectedCategory)
+        if(selectedCategory){
+            navigate(`/${selectedCategory.toLowerCase()}`)
+        }
+
+    }
     return (
         <div className={styles.div}>
             <div className={styles.container}>
                 <h1>Discover,create and savor delightful recipes</h1>
                 <p>from around the world with the ultimate culinary companion</p>
                 <div className={styles.inputcontainer}>
-                    <select value={category} onChange={(e) => setCategory(e.target.value)} className={styles.select}>
+                    <select value={category} onChange={handleCategorySelection} className={styles.select}>
                         {options.map((option,i) => 
                         <option value={option} key={i}>
                             {option}
