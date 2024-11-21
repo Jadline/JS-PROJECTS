@@ -13,14 +13,17 @@ import Form from "./Components/Form"
 import City from "./Components/City"
 import { Navigate } from "react-router-dom"
 import { CitiesProvider } from "./Context/CitiesContext"
+import { AuthProvider } from "./Context/FakeAuth"
 
 // 
 function App() {
   
 
   return ( 
+    <AuthProvider>
     <CitiesProvider>  
       <BrowserRouter>
+     
       <Routes>
         <Route path='/' element={<HomePage/>}/>
         <Route path="product" element={<Product/>}/>
@@ -35,8 +38,11 @@ function App() {
         </Route>
         <Route path='*' element={<PageNotFound/>}/>
       </Routes>
+      
       </BrowserRouter>
     </CitiesProvider>
+    </AuthProvider>
+   
  
   )
 }
