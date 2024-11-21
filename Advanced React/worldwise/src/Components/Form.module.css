@@ -6,6 +6,7 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  
 }
 
 .row {
@@ -25,6 +26,7 @@
   right: 1rem;
   top: 2.7rem;
   font-size: 2.8rem;
+  color : #000;
 }
 
 .form.loading {
